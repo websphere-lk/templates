@@ -14,7 +14,16 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@workspace/types/constants/*": ["libs/types/src/constants/*"],
+      "@workspace/types/dto/*": ["libs/types/src/dto/*"],
+      "@workspace/types/enums/*": ["libs/types/src/enums/*"],
+      "@workspace/types/interfaces/*": ["libs/types/src/interfaces/*"],
+      "@workspace/ui/components/*": ["libs/ui/src/components/*"],
+      "@workspace/ui/hooks/*": ["libs/ui/src/hooks/*"],
+      "@workspace/ui/icons/*": ["libs/ui/src/icons/*"],
+      "@workspace/ui/utils/*": ["libs/ui/src/utils/*"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

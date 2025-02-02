@@ -1,14 +1,27 @@
-import express from 'express';
+import { AppConfig } from './config/app.config';
+import { ExpressLoader } from './loaders';
+import { HttpServer } from './servers/http.server';
 
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+class App {
+  private httpServer: HttpServer;
 
-const app = express();
+  constructor() {
+    this.httpServer = new HttpServer();
+    this.loadLoaders();
+  }
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
-});
+  private loadLoaders() {
+    const expressLoader = new ExpressLoader(this.httpServer.getApp());
+    expressLoader.loadAll();
+  }
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
-});
+  public startServer(): void {
+    const port = AppConfig.APP_PORT;
+    this.httpServer.listen(port, () => {
+      console.log(`Server Started ✅ (PORT:${port})`);
+    });
+  }
+}
+
+const app = new App();
+app.startServer();
